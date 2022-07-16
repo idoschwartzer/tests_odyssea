@@ -7,13 +7,15 @@ def is_hiding_info_at_pixel(img_path):
         return "Invalid file type, expected BMP"
 
     bit_lst = []
+    # adding the last bit of each byte to bit_lst
     for bite in byte_lst:
         bit_lst.append(bite % 2)
 
     output = []
-    for bitoffset in range(8):
+    # trying different offsets and adding to the list 'output'
+    for bit_offset in range(8):
         for i in range(len(bit_lst) // 8):
-            byte = bit_lst[8 * i + bitoffset:8 * i + 8 + bitoffset]
+            byte = bit_lst[8*i+bit_offset : 8*i+8+bit_offset]
             bin_letter = 0
             for bit in byte:
                 bin_letter = bin_letter * 2 + bit
@@ -22,9 +24,12 @@ def is_hiding_info_at_pixel(img_path):
                 output.append(ch)
             else:
                 output.append(" ")
+    # adding the chars to one big string
     all_string = ''.join(output)
+    # splitting the big string to few words
     strings = all_string.split()
 
+    # checking if the sentence valid -> if 2 or more words are found in dictionary
     dict = open("words_alpha.txt", "r")
     dict_lst = dict.readlines()
     dict_set = set()
@@ -40,6 +45,9 @@ def is_hiding_info_at_pixel(img_path):
     return len(valid_words) > 2
 
 
+# ================================================================================================
+# Tests
+
 def test_file_format():
     assert is_hiding_info_at_pixel('img_input\\capybara.jpg') == "Invalid file type, expected BMP"
 
@@ -49,12 +57,12 @@ def test_file_format2():
 
 
 def test_bmp1():
-    assert is_hiding_info_at_pixel('img_output\\house.bmp') == True
+    assert is_hiding_info_at_pixel('img_output\\house.bmp') is True
 
 
 def test_bmp2():
-    assert is_hiding_info_at_pixel('img_output\\house2.bmp') == True
+    assert is_hiding_info_at_pixel('img_output\\house2.bmp') is True
 
 
 def test_bmp3():
-    assert is_hiding_info_at_pixel('img_output\\man.bmp') == True
+    assert is_hiding_info_at_pixel('img_output\\man.bmp') is True

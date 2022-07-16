@@ -1,18 +1,23 @@
-import os #using only in tests, so no cheating :)
+import os
+# using only in tests, so no cheating :)
 
 
-def encode_jpg(jpg_path, text, output_path): #gets img path(jpeg) and returns other img path(jpeg) with given text
-    img = open(jpg_path, "rb") # opening in binary the path fie
+# gets img path(jpeg) and returns other img path(jpeg) with given text
+def encode_jpg(jpg_path, text, output_path):
+    # opening in binary the path fie
+    img = open(jpg_path, "rb")
+    # converting the text to binary and adding it to the output path
     output_path = open(output_path, "wb")
     output_path.write(img.read())
-    output_path.write(text.encode()) # converting the text to binary and adding it to the output path
-    output_path.close() # closing the file, can also write "with _______ as _______" which also closes the file
+    # closing the file, can also write "with _______ as _______" which also closes the file
+    output_path.write(text.encode())
+    output_path.close()
     return output_path
 
 
-
-
+# ======================================================================================================================
 # Tests:
+
 def test_sheela_1():
     orig_file = "img_input\\cat.jpg"
     new_file = "img_output\\new_cat.jpg"
@@ -26,7 +31,7 @@ def test_sheela_1():
     text_len = len(text.encode())
     final_img.seek(file_size-text_len)
     bin_text = final_img.read()
-    found_text =  bin_text.decode('utf-8')
+    found_text = bin_text.decode('utf-8')
     assert found_text == text
 
 

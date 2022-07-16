@@ -1,15 +1,22 @@
 import os
+# using only in tests, so no cheating :)
 
 
-def decode_jpg(jpg_path): #gets img path(jpg) and returns hidden text
-    img = open(jpg_path, "rb") # opening in binary the path fie
+# gets img path(jpg) and returns hidden text
+def decode_jpg(jpg_path):
+    # opening in binary the path fie
+    img = open(jpg_path, "rb")
     str_img = img.read()
-    start = str_img.find(b'\xff\xd9') + 2
+    # jpeg file starts with FFD9, start stands for the index after bit  \xD9
+    start = str_img.find(b'\xFF\xD9') + 2
     img.close()
+    # returning the hidden text and decoding him, meaning we are converting him from bin to ascii
     return str_img[start::].decode('utf-8')
 
 
+# ======================================================================================================================
 # Tests:
+
 def test_sheela_0():
     file = "img_input\\dog.jpg"
     assert decode_jpg(file) == ""
