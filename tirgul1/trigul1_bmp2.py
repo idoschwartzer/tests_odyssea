@@ -13,7 +13,7 @@ def decode_pixels(img_path):
         bit_lst.append(byte % 2)
 
     output = []
-    # connecting the lst bits to bytes
+    # connecting the list bits to bytes
     for i in range(len(bit_lst)//8):
         byte = bit_lst[8*i:8*i+8] # each time skip to next byte
         bin_letter = 0
