@@ -28,7 +28,10 @@ def decode_pixels(img_path):
     final_str = ''.join(output)
     return final_str
 
+
+# ======================================================================================================================
 # Tests:
+
 def test_pixels1():
     orig_img = "img_input\\house2.bmp"
     new_file = "img_output\\house2.bmp"
